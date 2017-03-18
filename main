@@ -1,0 +1,151 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Registro{
+    char nome[50];
+    char telefone[20];
+    char email[30];
+    char cidade[20];
+    char estado[2];
+};
+
+void leia(struct Registro *reg, int i){
+
+    printf("\n Digite seu nome: ");
+    setbuf(stdin,NULL);
+    gets(reg[i].nome);
+    printf("\n Digite seu telefone: ");
+    gets(reg[i].telefone);
+    printf("\n Digite seu e-mail: ");
+    gets(reg[i].email);
+    printf("\n Digite sua cidade: ");
+    gets(reg[i].cidade);
+    printf("\n Digite seu estado: ");
+    gets(reg[i].estado);
+
+}
+
+void listar(struct Registro *reg, int i){
+
+    printf("\n\t\t Seu registro \n");
+    printf("\n Nome: %s", reg[i].nome);
+    printf("\n Telefone: %s", reg[i].telefone);
+    printf("\n Email: %s", reg[i].email);
+    printf("\n Cidade: %s", reg[i].cidade);
+    printf("\n Estado: %s", reg[i].estado);
+
+}
+
+void altera(struct Registro *reg, int i) {
+
+    printf("\n Digite seu nome: ");
+    setbuf(stdin,NULL);
+    gets(reg[i].nome);
+    printf("\n Digite seu telefone: ");
+    gets(reg[i].telefone);
+    printf("\n Digite seu e-mail: ");
+    gets(reg[i].email);
+    printf("\n Digite sua cidade: ");
+    gets(reg[i].cidade);
+    printf("\n Digite seu estado: ");
+    gets(reg[i].estado);
+
+}
+
+void remover(struct Registro *reg, int i) {
+
+    strcpy (reg[i].nome, "");
+    strcpy (reg[i].telefone, "");
+    strcpy (reg[i].email, "");
+    strcpy (reg[i].cidade, "");
+    strcpy (reg[i].estado, "");
+
+}
+
+void buscar(struct Registro *reg, int j, int i) {
+    int ret;
+
+    printf("\n Digite o nome que voce quer achar: ");
+
+    scanf("%s", reg[j-1].nome);
+
+    ret = strcmp(reg[j-1].nome, reg[i].nome);
+
+    if(ret < 0) {
+    printf("Nao existe registro com esse nome!");
+    } else if(ret > 0) {
+    printf("Nao existe registro com esse nome!");
+    } else {
+    printf("\n\t\t Seu registro \n");
+    printf("\n Nome: %s", reg[i].nome);
+    printf("\n Telefone: %s", reg[i].telefone);
+    printf("\n Email: %s", reg[i].email);
+    printf("\n Cidade: %s", reg[i].cidade);
+    printf("\n Estado: %s", reg[i].estado);
+    }
+
+}
+
+void main(int argc, char* args[]){
+    int n;
+
+    struct Registro *reg = malloc(sizeof(struct Registro));
+
+    do{
+        int i = 0;
+        int j = 0;
+
+        printf("\n\n\t\t Bem Vindo a Agenda \n");
+        printf("\n 1 - Inserir registro");
+        printf("\n 2 - Listar registros");
+        printf("\n 3 - Alterar registro");
+        printf("\n 4 - Remover registro");
+        printf("\n 5 - Buscar registro");
+        printf("\n 6 - Sair");
+
+        printf("\n Digite uma opcao: ");
+        scanf("%d", &n);
+        system("cls");
+
+        switch(n) {
+            case 1:
+                leia(reg, i);
+                i++;
+
+                break;
+            case 2:
+                listar(reg, i);
+
+
+                break;
+            case 3:
+                altera(reg, i);
+                i++;
+
+                break;
+            case 4:
+                remover(reg, i);
+
+                break;
+            case 5:
+                buscar(reg, j, i);
+
+                break;
+            case 6:
+                printf("\n\n Finalizando... \n\n");
+                system("pause");
+                exit(0);
+
+                break;
+            default:
+                printf("\n\n Opcao invalida! Tente novamente! \n\n");
+                system("pause");
+
+                break;
+        }
+
+    }while(n != 5);
+
+    free(reg);
+}
